@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab2/util/difficulty.dart';
 
 class DifficulyControl extends StatefulWidget {
    const DifficulyControl({super.key});
@@ -8,8 +9,26 @@ class DifficulyControl extends StatefulWidget {
 }
 
 class _DifficulyControlState extends State<DifficulyControl> {
+  String _difficulty = Difficulty.labels[0];
    @override
-   Widget build(BuildContext context) {
-      return const Placeholder();
-   }
+  Widget build(BuildContext context) {
+    return RadioGroup<String>(
+      groupValue: _difficulty,
+      onChanged: (value) {
+        setState(() {
+          _difficulty = value!;
+        });
+      },
+      child: Column(
+        children: [
+          for (final label in Difficulty.labels)
+            RadioListTile<String>(
+              dense: true,
+              title: Text(label),
+              value: label,
+            ),
+        ],
+      ),
+    );
+  }
 }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lab2/widgets/difficulty_control.dart';
 import 'package:lab2/widgets/ingredient_control.dart';
 import 'package:lab2/widgets/kitchen_control.dart';
+import 'package:lab2/widgets/price_control.dart';
+import 'package:lab2/widgets/recipe_list.dart';
+import 'package:lab2/widgets/time_control.dart';
 
 
 
@@ -47,7 +50,19 @@ Widget _controlPanel(context, { double width = 320}) {
             children: [
               Text( "Svårighetsgrad"),
               SizedBox( width: 10),
-              DifficulyControl()])
+              DifficulyControl()]),
+
+          Column(
+            children: [
+              Text( "Maxpris"),
+              PriceControl()]
+          ),
+
+          Column(
+            children: [
+              Text( "Maxtid"),
+              TimeControl(),]
+          )
       ],
     )
     
@@ -57,8 +72,11 @@ Widget _controlPanel(context, { double width = 320}) {
 
 Widget _recipeArea(context) {
   return Expanded(
-    child: Container(color: const Color.fromARGB(255, 252, 204, 252))
-    );
+    child: Container(
+      //color: const Color.fromARGB(255, 204, 216, 176),
+      child: RecipeList(),
+    ),
+ );
 }
 
 }

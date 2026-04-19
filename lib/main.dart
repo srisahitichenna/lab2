@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:lab2/model/recipe_database/recipe_handler.dart';
 import 'package:lab2/pages/main_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => RecipeHandler(
+        child: const MyApp(),
+      ),
+      child: const MyApp(),
+    ),
+  );
 }
+
+/*{
+  runApp(const MyApp());
+}*/
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

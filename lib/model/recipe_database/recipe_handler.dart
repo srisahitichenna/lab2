@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lab2/main.dart';
 import 'package:lab2/model/recipe_database/recipe.dart';
 import 'package:lab2/model/recipe_database/search_filter.dart';
 import 'package:lab2/util/functions.dart';
@@ -12,7 +13,7 @@ class RecipeHandler extends ChangeNotifier {
 
   final SearchFilter _filter = SearchFilter.withoutName(null, 0, null, 0, null);
 
-  RecipeHandler() {
+  RecipeHandler({required MyApp child}) {
     _loadRecipes();
   }
 

@@ -15,7 +15,7 @@ class RecipeDetail extends StatelessWidget {
     return Row( 
       children:[
 
-        SizedBox(width: 20),
+        SizedBox(width: 50),
 
         SizedBox(
           height: 300,

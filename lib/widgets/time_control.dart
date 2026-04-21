@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab2/model/recipe_database/recipe_handler.dart';
+import 'package:provider/provider.dart';
 
 class TimeControl extends StatefulWidget {
    const TimeControl({super.key});
@@ -13,6 +15,8 @@ class _TimeControlState extends State<TimeControl> {
 
   @override
 Widget build(BuildContext context) {
+  var recipeHandler = Provider.of<RecipeHandler>(context, listen: false);
+
   return Column(
     children: [
       Slider(
@@ -23,6 +27,7 @@ Widget build(BuildContext context) {
           setState(() {
             _time = value;
           });
+          recipeHandler.setMaxTime(value.round());
         },
       ),
       Text('${_time.round()} min'),

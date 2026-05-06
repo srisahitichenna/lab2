@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:lab2/app_theme.dart';
 import 'package:lab2/widgets/difficulty_control.dart';
 import 'package:lab2/widgets/ingredient_control.dart';
 import 'package:lab2/widgets/kitchen_control.dart';

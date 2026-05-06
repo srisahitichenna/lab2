@@ -14,7 +14,7 @@ class MainView extends StatelessWidget {
   @override
 Widget build(BuildContext context) {
    return Scaffold(
-   body: Row(children: [ControlPanel(), RecipeArea()]),
+   body: Row(children: [ControlPanel(), SizedBox(width: 5), RecipeArea()]),
  );
 }
 

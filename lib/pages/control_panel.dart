@@ -16,6 +16,7 @@ Widget build(context, { double width = 320}) {
   return Container(
     width: width,
     color: const Color.fromARGB(255, 248, 252, 207),
+    padding: const EdgeInsets.only(left: 12),
     
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +27,9 @@ Widget build(context, { double width = 320}) {
           child: Text( 
             'My Title')
           ),*/
-        Text( 'Hitta ett recept som passar genom att ändra iställningarna nedanför'),
+        Center(
+          child:
+        Text( 'Hitta ett recept som passar genom att ändra iställningarna nedanför', textAlign: TextAlign.center,)),
 
         
         IngredientControl(),
@@ -37,6 +40,7 @@ Widget build(context, { double width = 320}) {
         
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Text( "Svårighetsgrad"),
               SizedBox( width: 10),

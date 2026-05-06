@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lab2/app_theme.dart';
 import 'package:lab2/model/recipe_database/recipe.dart';
 import 'package:lab2/ui_controller.dart';
+import 'package:lab2/util/cuisine.dart';
+import 'package:lab2/util/difficulty.dart';
+import 'package:lab2/util/main_ingredient.dart';
 import 'package:provider/provider.dart';
 
 class RecipeDetail extends StatelessWidget {
@@ -11,59 +14,126 @@ class RecipeDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var uiController = Provider.of<UIController>(context, listen: false);
+    final uiController = Provider.of<UIController>(context, listen: false);
 
     return Card(
-  elevation: 4,
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(12),
-  ),
-  child: Row(
-    children: [
-      SizedBox(width: 16),
-
-      SizedBox(
-        height: 240,
-        width: 240,
-        child: recipe.customImage(),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
-
-      SizedBox(width: 16),
-
-      Expanded(
-        child: Column(
+      child: Padding(
+        padding: EdgeInsets.all(AppTheme.paddingMedium),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(recipe.name, style: AppTheme.mediumHeading),
+            SizedBox(
+              width: 300,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _image(recipe),
 
-            SizedBox(height: 8),
+                  SizedBox(height: AppTheme.paddingMedium),
 
-            Text("Tillagning", style: AppTheme.mediumHeading),
-            Text(recipe.description),
+                  Text('Ingredienser', style: AppTheme.mediumHeading),
+                  SizedBox(height: AppTheme.paddingSmall),
 
-            SizedBox(height: 12),
+                  Text('${recipe.servings} portioner'),
+                  SizedBox(height: AppTheme.paddingSmall),
 
-            Text("Ingredienser", style: AppTheme.mediumHeading),
-            Text(recipe.ingredients.join(", ")),
+                  Text(
+                  recipe.ingredients.join('\n'),
+                  ),
+                ],
+              ),
+            ),
 
-            Spacer(),
+            SizedBox(width: AppTheme.paddingLarge),
 
-            Align(
-              alignment: Alignment.bottomRight,
-              child: IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  uiController.deselectRecipe();
-                },
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          recipe.name,
+                          style: AppTheme.largeHeading,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: uiController.deselectRecipe,
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: AppTheme.paddingSmall),
+
+                Row(
+  children: [
+    if (MainIngredient.icon(recipe.mainIngredient, width: 20) != null)
+      MainIngredient.icon(recipe.mainIngredient, width: 20)!,
+
+    SizedBox(width: AppTheme.paddingSmall),
+
+    if (Difficulty.icon(recipe.difficulty, width: 30) != null)
+      Difficulty.icon(recipe.difficulty, width: 30)!,
+
+    SizedBox(width: AppTheme.paddingSmall),
+
+    Text('${recipe.time} minuter'),
+
+    SizedBox(width: AppTheme.paddingSmall),
+
+    Text('${recipe.price}kr'),
+  ],
+),
+
+                  SizedBox(height: AppTheme.paddingMediumSmall),
+
+                  Text(recipe.description),
+
+                  SizedBox(height: AppTheme.paddingLarge),
+
+                  Text('Tillagning:', style: AppTheme.mediumHeading),
+                  SizedBox(height: AppTheme.paddingSmall),
+
+                  Text(recipe.instruction),
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
 
-      SizedBox(width: 16),
-    ],
-  ),
-);
-}
+  Widget _image(Recipe recipe) {
+    final flagImage = Cuisine.flag(recipe.cuisine, width: 60.0);
+
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(2),
+          child: SizedBox(
+            height: 240,
+            width: 300,
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: recipe.customImage(),
+            ),
+          ),
+        ),
+        if (flagImage != null)
+          Positioned(
+            bottom: AppTheme.paddingSmall,
+            right: AppTheme.paddingSmall,
+            child: flagImage,
+          ),
+      ],
+    );
+  }
 }

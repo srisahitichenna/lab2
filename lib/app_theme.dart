@@ -28,4 +28,8 @@ static const TextStyle smallHeading = TextStyle(
   letterSpacing: 0.15,
  );
 
+static const TextStyle largeHeading = TextStyle(
+  fontSize: 32,
+  fontWeight: FontWeight.w400,
+);
 }

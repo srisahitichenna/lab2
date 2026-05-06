@@ -21,7 +21,7 @@ Widget build(BuildContext context) {
     borderRadius: BorderRadius.circular(12),
     splashColor: Colors.blue.withAlpha(30),
     onTap: onTap,
-    child: Container(
+    child: SizedBox(
       height: 128,
       child: Row(
         children: [
@@ -66,7 +66,7 @@ Widget build(BuildContext context) {
 }
 Widget _image(Recipe recipe) {
   var square = ClipRect(
-    child: Container(
+    child: SizedBox(
       width: 104, // Square width
       height: 104, // Square height
       child: FittedBox(fit: BoxFit.cover, child: recipe.image),
